@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Creation date: (11/16/03 4:30:45 PM)
  */
 public class ContextBuffer{
-    private java.util.ArrayList bufferArrayList;
+    private java.util.ArrayList<int[]> bufferArrayList;
     private int capacity;
     private int pageSize;
     protected int size;
@@ -51,7 +51,7 @@ public ContextBuffer(int i) {
 	incSize = i;
 	if (incSize<0)
 	  throw new IllegalArgumentException();
-	bufferArrayList = new ArrayList();	
+	bufferArrayList = new ArrayList<>();	
 }
 /**
  * ContextBuffer constructor comment.
@@ -68,7 +68,7 @@ public ContextBuffer(int p, int i) {
     incSize = i;
     if (incSize < 0)
         throw new IllegalArgumentException("context buffer's incremental size must be greater than zero");
-    bufferArrayList = new ArrayList();
+    bufferArrayList = new ArrayList<>();
 }
 /**
  * Pop the content value back into an integer array.
@@ -100,7 +100,7 @@ public boolean load(int[] output){
     if (first_index == last_index) {
         // to see if there is a need to go across buffer boundry
         System.arraycopy(
-            (int[]) (bufferArrayList.get(first_index)),
+            (bufferArrayList.get(first_index)),
 			//startingOffset % pageSize,
             startingOffset & r,
             output,
@@ -109,7 +109,7 @@ public boolean load(int[] output){
     } else {
         int int_array_offset = 0;
         for (int i = first_index; i <= last_index; i++) {
-            int[] currentChunk = (int[]) bufferArrayList.get(i);
+            int[] currentChunk = bufferArrayList.get(i);
             if (i == first_index) // first section
                 {
                 System.arraycopy(
@@ -288,7 +288,7 @@ public void store(int[] input){
     } else {
         lastBufferIndex = Math.min((size>>n),//+(((size&r)==0)? 0:1), 
                 bufferArrayList.size() - 1);
-        lastBuffer = (int[]) bufferArrayList.get(lastBufferIndex);        
+        lastBuffer = bufferArrayList.get(lastBufferIndex);        
     }
    
 
@@ -312,11 +312,11 @@ public void store(int[] input){
             int z;
             for (z=1;z<=k;z++){
                 System.arraycopy(input,offset,
-                        (int[]) bufferArrayList.get(lastBufferIndex+z), 0, pageSize);
+                        bufferArrayList.get(lastBufferIndex+z), 0, pageSize);
                 offset += pageSize;
             }
             // copy the last part
-            System.arraycopy(input,offset,(int[]) bufferArrayList.get(lastBufferIndex+z), 0, l & r);
+            System.arraycopy(input,offset,bufferArrayList.get(lastBufferIndex+z), 0, l & r);
         }
         size += input.length;
         return;
