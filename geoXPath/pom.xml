@@ -19,21 +19,16 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.vividsolutions</groupId>
             <artifactId>jts</artifactId>
-            <version>1.8</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.sample</groupId>
             <artifactId>java-cup</artifactId>
-            <version>11a</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/java-cup-11a-runtime.jar</systemPath>
+            <systemPath>${project.basedir}/../lib/java-cup-11a-runtime.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

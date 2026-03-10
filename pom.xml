@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ximpleware</groupId>
@@ -16,10 +18,50 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <java.version>21</java.version>
+        <java-cup.location>${project.basedir}/lib/java-cup-11a-runtime.jar</java-cup.location>
     </properties>
 
     <modules>
-    	<module>geoXPath</module>
-    	<module>ximple-dev</module>
+        <module>geoXPath</module>
+        <module>ximple-dev</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.2</version>
+            </dependency>
+            <dependency>
+                <groupId>jaxen</groupId>
+                <artifactId>jaxen</artifactId>
+                <version>1.1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.w3c</groupId>
+                <artifactId>dom</artifactId>
+                <version>2.3.0-jaxb-1.0.6</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.14</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vividsolutions</groupId>
+                <artifactId>jts</artifactId>
+                <version>1.8</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sample</groupId>
+                <artifactId>java-cup</artifactId>
+                <version>11a</version>
+                <scope>system</scope>
+                <systemPath>${java-cup.location}</systemPath>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 </project>
